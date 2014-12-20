@@ -2,7 +2,23 @@
   (:require [clojure.test :refer :all]
             [doll-smuggler.core :refer :all]))
 
-(def small-input
+(def one-doll-input
+  (str "max weight: 10\n"
+       "\n"
+       "available dolls:\n"
+       "\n"
+       "name   weight   value\n"
+       "onlyone  10       10\n"))
+
+(def one-doll-too-big-input
+   (str "max weight: 10\n"
+        "\n"
+        "available dolls:\n"
+        "\n"
+        "name   weight   value\n"
+        "toobig   100      10\n"))
+
+(def two-dolls-input
   (str "max weight: 100\n"
        "\n"
        "available dolls:\n"
@@ -11,7 +27,7 @@
        "bob      100      10\n"
        "fred      50      20\n"))
 
-(def large-input
+(def many-dolls-input
   (str "max weight: 400\n"
        "\n"
        "available dolls:\n"
@@ -45,7 +61,7 @@
     (is (= {:max-weight 100
             :dolls [{:name "bob" :weight 100 :value 10}
                     {:name "fred" :weight 50 :value 20}]}
-           (parse-input small-input)))))
+           (parse-input two-dolls-input)))))
 
 (deftest parse-a-larger-valid-input-file
   (testing "with a large valid input file")
@@ -72,9 +88,19 @@
                     {:name "tory" :weight 18 :value 12}
                     {:name "sally" :weight 4 :value 50}
                     {:name "babe" :weight 30 :value 10}]}
-        (parse-input large-input))))
+        (parse-input many-dolls-input))))
 
-(deftest small-input-answer
+(deftest single-input-answer
+  (testing "with a single valid input"
+    (is (= [{:name "onlyone" :weight 10 :value 10}]
+           (find-optimal-packing one-doll-input)))))
+
+(deftest single-input-non-fit-answer
+  (testing "with a single input that does not fit"
+    (is (= []
+           (find-optimal-packing one-doll-too-big-input)))))
+
+(deftest two-options-answer
   (testing "with small input"
     (is (= [{:name "fred" :weight 50 :value 20}]
-           (find-optimal-packing small-input)))))
+           (find-optimal-packing two-dolls-input)))))
