@@ -45,3 +45,8 @@
                     {:name "randal" :weight 27 :value 60}
                     {:name "april" :weight 39 :value 40}]}
         (parse-input large-input))))
+
+(deftest small-input-answer
+  (testing "with small input"
+    (is (= [{:name "fred" :weight 50 :value 20}]
+           (find-optimal-packing small-input)))))
