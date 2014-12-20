@@ -24,7 +24,21 @@
        "puppy      15    60\n"
        "thomas     68    45\n"
        "randal     27    60\n"
-       "april      39    40\n"))
+       "april      39    40\n"
+       "nancy      23    30\n"
+       "bonnie     52    10\n"
+       "marc       11    70\n"
+       "kate       32    30\n"
+       "tbone      24    15\n"
+       "tranny     48    10\n"
+       "uma        73    40\n"
+       "grumpkin   42    70\n"
+       "dusty      43    75\n"
+       "grumpy     22    80\n"
+       "eddie       7    20\n"
+       "tory       18    12\n"
+       "sally       4    50\n"
+       "babe       30    10\n"))
 
 (deftest parse-a-small-valid-input-file
  (testing "with a small valid input file"
@@ -43,7 +57,21 @@
                     {:name "puppy" :weight 15 :value 60}
                     {:name "thomas" :weight 68 :value 45}
                     {:name "randal" :weight 27 :value 60}
-                    {:name "april" :weight 39 :value 40}]}
+                    {:name "april" :weight 39 :value 40}
+                    {:name "nancy" :weight 23 :value 30}
+                    {:name "bonnie" :weight 52 :value 10}
+                    {:name "marc" :weight 11 :value 70}
+                    {:name "kate" :weight 32 :value 30}
+                    {:name "tbone" :weight 24 :value 15}
+                    {:name "tranny" :weight 48 :value 10}
+                    {:name "uma" :weight 73 :value 40}
+                    {:name "grumpkin" :weight 42 :value 70}
+                    {:name "dusty" :weight 43 :value 75}
+                    {:name "grumpy" :weight 22 :value 80}
+                    {:name "eddie" :weight 7 :value 20}
+                    {:name "tory" :weight 18 :value 12}
+                    {:name "sally" :weight 4 :value 50}
+                    {:name "babe" :weight 30 :value 10}]}
         (parse-input large-input))))
 
 (deftest small-input-answer
