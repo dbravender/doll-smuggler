@@ -49,7 +49,7 @@
         weight-width (+ 1 (apply max (map count (into ["weight"] (map #(str (:weight %)) dolls)))))
         value-width (+ 1 (apply max (map count (into ["value"] (map #(str (:value %)) dolls)))))
         column-formatter (fn [name weight value] (format (str "%-" name-width "s %" weight-width "s %" value-width "s\n") name weight value))
-        formatted-dolls (map #(column-formatter (:name %1) (:weight %1) (:value %1)) (reverse dolls))]
+        formatted-dolls (map #(apply column-formatter (map % [:name :weight :value])) (reverse dolls))]
     (str "packed dolls:\n"
          "\n"
          (column-formatter "name" "weight" "value")
