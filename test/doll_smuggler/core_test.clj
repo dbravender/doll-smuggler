@@ -118,6 +118,10 @@
     (is (= [0 []]
            (find-optimal-packing-naive-inefficient-used-to-build-base-test-cases (parse-input one-doll-too-big-input))))
     (is (= [10 [{:name "onlyone" :weight 10 :value 10}]]
-           (recursive-optimal-packing (parse-input one-doll-input)))
+           (recursive-optimal-packing (parse-input one-doll-input))))
     (is (= [10 [{:name "onlyone" :weight 10 :value 10}]]
-           (find-optimal-packing-naive-inefficient-used-to-build-base-test-cases (parse-input one-doll-input)))))))
+           (find-optimal-packing-naive-inefficient-used-to-build-base-test-cases (parse-input one-doll-input))))
+    (is (= [150 [{:name "luke" :weight 9 :value 150}]]
+           (recursive-optimal-packing (assoc (parse-input many-dolls-input) :max-weight 9))))
+    (is (= [50 [{:name "sally" :weight 4 :value 50}]]
+           (recursive-optimal-packing (assoc (parse-input many-dolls-input) :max-weight 7))))))
