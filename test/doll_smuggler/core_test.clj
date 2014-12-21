@@ -112,3 +112,9 @@
                 "name   weight   value\n"
                 "fred 50 20\n")
            (optimal-packing-formatted two-dolls-input)))))
+
+(deftest check-value-sum
+  (testing "the total value is correct"
+    (is (= 1030 (recursive-optimal-packing (parse-input many-dolls-input)))
+    (is (= 0 (recursive-optimal-packing (parse-input one-doll-too-big-input)))
+    (is (= 10 (recursive-optimal-packing (parse-input one-doll-input))))))))
