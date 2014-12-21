@@ -28,6 +28,16 @@
        highest-value (first (reverse (sort-by #(apply + (map :value %)) light-enough)))]
     highest-value))
 
+(defn optimal-packing-formatted
+  [contents]
+  (let [dolls (find-optimal-packing contents)
+        formatted-dolls (map #(str (:name %1) " " (:weight %1) " " (:value %1)) dolls)]
+    (str "packed dolls:\n"
+         "\n"
+         "name   weight   value\n"
+         (str/join "\n" formatted-dolls)
+         "\n")))
+
 (defn -main
   [& args]
   nil)

@@ -104,3 +104,11 @@
   (testing "with small input"
     (is (= [{:name "fred" :weight 50 :value 20}]
            (find-optimal-packing two-dolls-input)))))
+
+(deftest human-readable-output
+  (testing "response is written in a human readable form"
+    (is (= (str "packed dolls:\n"
+                "\n"
+                "name   weight   value\n"
+                "fred 50 20\n")
+           (optimal-packing-formatted two-dolls-input)))))
