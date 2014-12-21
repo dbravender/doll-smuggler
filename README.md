@@ -11,6 +11,7 @@ as described below.
 ## Testing
 
     $ lein test
+    $ ./acceptance-tests.sh
 
 ## Accepted input
 
