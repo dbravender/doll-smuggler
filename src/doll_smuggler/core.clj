@@ -45,7 +45,7 @@
 (defn optimal-packing-formatted
   [dolls-and-max-weight]
   (let [[max-weight dolls] (recursive-optimal-packing dolls-and-max-weight)
-        formatted-dolls (map #(str (:name %1) " " (:weight %1) " " (:value %1)) dolls)]
+        formatted-dolls (map #(str (:name %1) " " (:weight %1) " " (:value %1)) (reverse dolls))]
     (str "packed dolls:\n"
          "\n"
          "name   weight   value\n"
@@ -54,4 +54,5 @@
 
 (defn -main
   [& args]
-  nil)
+  (let [in (if (nil? args) *in* (nth args 0))]
+    (print (-> in slurp parse-input optimal-packing-formatted))))
