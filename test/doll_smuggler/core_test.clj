@@ -90,31 +90,34 @@
                     {:name "babe" :weight 30 :value 10}]}
         (parse-input many-dolls-input))))
 
-(deftest single-input-answer
-  (testing "with a single valid input"
-    (is (= [{:name "onlyone" :weight 10 :value 10}]
-           (find-optimal-packing one-doll-input)))))
-
-(deftest single-input-non-fit-answer
-  (testing "with a single input that does not fit"
-    (is (= []
-           (find-optimal-packing one-doll-too-big-input)))))
-
-(deftest two-options-answer
-  (testing "with small input"
-    (is (= [{:name "fred" :weight 50 :value 20}]
-           (find-optimal-packing two-dolls-input)))))
-
 (deftest human-readable-output
   (testing "response is written in a human readable form"
     (is (= (str "packed dolls:\n"
                 "\n"
                 "name   weight   value\n"
                 "fred 50 20\n")
-           (optimal-packing-formatted two-dolls-input)))))
+           (optimal-packing-formatted (parse-input two-dolls-input))))))
 
 (deftest check-value-sum
   (testing "the total value is correct"
-    (is (= 1030 (recursive-optimal-packing (parse-input many-dolls-input)))
-    (is (= 0 (recursive-optimal-packing (parse-input one-doll-too-big-input)))
-    (is (= 10 (recursive-optimal-packing (parse-input one-doll-input))))))))
+    (is (= [1030 [{:name "luke", :weight 9, :value 150}
+                  {:name "anthony", :weight 13, :value 35}
+                  {:name "candice", :weight 153, :value 200}
+                  {:name "dorothy", :weight 50, :value 160}
+                  {:name "puppy", :weight 15, :value 60}
+                  {:name "randal", :weight 27, :value 60}
+                  {:name "marc", :weight 11, :value 70}
+                  {:name "grumpkin", :weight 42, :value 70}
+                  {:name "dusty", :weight 43, :value 75}
+                  {:name "grumpy", :weight 22, :value 80}
+                  {:name "eddie", :weight 7, :value 20}
+                  {:name "sally", :weight 4, :value 50}]])
+           (recursive-optimal-packing (parse-input many-dolls-input)))
+    (is (= [0 []]
+           (recursive-optimal-packing (parse-input one-doll-too-big-input))))
+    (is (= [0 []]
+           (find-optimal-packing-naive-inefficient-used-to-build-base-test-cases (parse-input one-doll-too-big-input))))
+    (is (= [10 [{:name "onlyone" :weight 10 :value 10}]]
+           (recursive-optimal-packing (parse-input one-doll-input)))
+    (is (= [10 [{:name "onlyone" :weight 10 :value 10}]]
+           (find-optimal-packing-naive-inefficient-used-to-build-base-test-cases (parse-input one-doll-input)))))))
