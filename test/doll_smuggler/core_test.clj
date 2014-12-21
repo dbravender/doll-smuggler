@@ -94,9 +94,17 @@
   (testing "response is written in a human readable form"
     (is (= (str "packed dolls:\n"
                 "\n"
-                "name   weight   value\n"
-                "fred 50 20\n")
-           (optimal-packing-formatted (parse-input two-dolls-input))))))
+                "name     weight    value\n"
+                "a      10000000  1000000\n")
+           (optimal-packing-formatted {:max-weight 10000000
+                                       :dolls [{:name "a"
+                                                :weight 10000000
+                                                :value 1000000}]}))
+    (is (= (str "packed dolls:\n"
+                "\n"
+                "name   weight  value\n"
+                "fred       50     20\n")
+           (optimal-packing-formatted (parse-input two-dolls-input)))))))
 
 (deftest check-value-sum
   (testing "the total value is correct"

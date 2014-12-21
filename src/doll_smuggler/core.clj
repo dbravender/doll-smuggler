@@ -45,12 +45,15 @@
 (defn optimal-packing-formatted
   [dolls-and-max-weight]
   (let [[max-weight dolls] (recursive-optimal-packing dolls-and-max-weight)
-        formatted-dolls (map #(str (:name %1) " " (:weight %1) " " (:value %1)) (reverse dolls))]
+        name-width (+ 1 (apply max (map count (into ["name"] (map #(:name %) dolls)))))
+        weight-width (+ 1 (apply max (map count (into ["weight"] (map #(str (:weight %)) dolls)))))
+        value-width (+ 1 (apply max (map count (into ["value"] (map #(str (:value %)) dolls)))))
+        column-formatter (fn [name weight value] (format (str "%-" name-width "s %" weight-width "s %" value-width "s\n") name weight value))
+        formatted-dolls (map #(column-formatter (:name %1) (:weight %1) (:value %1)) (reverse dolls))]
     (str "packed dolls:\n"
          "\n"
-         "name   weight   value\n"
-         (str/join "\n" formatted-dolls)
-         "\n")))
+         (column-formatter "name" "weight" "value")
+         (str/join "" formatted-dolls))))
 
 (defn -main
   [& args]

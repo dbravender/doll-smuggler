@@ -21,7 +21,7 @@ Input is required to be in the following format:
     available dolls:          # ignored but there must be a line here
                               # ignored but there must be a line here
     name    weight value      # ignored but there must be a line here
-    luke        9   150       # whitespace is ignored
+    luke        9   150       # at least one doll is required
     ...                       #   * name must not contain spaces
 
 ## Output sample
